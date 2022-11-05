@@ -12,7 +12,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [nextPage, setNextPage] = useState("");
   const [startToken, setStartToken] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(4);
 
 
   async function fetchNFTs() {
