@@ -1,6 +1,8 @@
 import Swal from 'sweetalert2'
 import { ReactPaginate } from "react-paginate";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useState } from "react";
+
 export const NFTCard = ({nft})=>{
     const [isHovering, setIsHovering] = useState(false);
 
@@ -31,16 +33,17 @@ export const NFTCard = ({nft})=>{
     }
     function contract(e) {
       e.preventDefault();
+     navigator.clipboard.writeText(nft.contract.address);
       Swal.fire({
-          title:'contract',
-          text: nft.contract.address,
-          imageUrl: nft.media[0].gateway,
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: 'Custom image',
-      })
+  position: 'top-end',
+  icon: 'success',
+  title: 'copy contract<br/>'+nft.contract.address,
+  showConfirmButton: false,
+  timer: 1500
+})
       //console.log('You clicked submit.'+nft.title);
     }
+    
     return(
         <div className="w-1/3 flex flex-col transition duration-500 hover:scale-110 border-2 border-black border-r-3">
             <div className="rounded-md">
@@ -52,9 +55,10 @@ export const NFTCard = ({nft})=>{
                    <b> Name: </b>{nft.title}
                 </h2>
                       <center>
-                      <button className={"cursor-pointer shadow bg-green-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"} onClick={Description}>Description</button>
-                      <button className={"cursor-pointer shadow bg-yellow-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"} onClick={tokenId}>Token ID</button>
-                      <button className={"cursor-pointer shadow bg-orange-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"}onClick={contract}>contract</button>
+                      <button className={"cursor-pointer shadow bg-green-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"} onClick={Description}>Descrip</button>
+                      <button className={"cursor-pointer shadow bg-yellow-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"} onClick={tokenId}>Token</button>
+                      <button className={"cursor-pointer shadow bg-orange-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white hover:font-bold py-2 px-4 rounded"}onClick={contract}>COPY</button>
+                  
                       </center>
                 </div>
             </div>
